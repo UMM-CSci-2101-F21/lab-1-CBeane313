@@ -25,7 +25,8 @@ public class IntListArrayBased implements IntegerList {
     if (numItems >= MAX_LIST) {
     // todo: part of step 5:
     // fix the code so that the message provides correct details about the problem
-    throw new ListIndexOutOfBoundsException("ListIndexOutOfBoundsException on insert");
+    throw new ListIndexOutOfBoundsException("List exception on insert - too much stuff!"+
+    " Could not insert item: <" + item + "> because the list was already full.");
 
     } else {
       for (int i=numItems; i>position; i--) { // Shift elements up
@@ -51,13 +52,27 @@ public class IntListArrayBased implements IntegerList {
   @Override
   public int remove() 
     throws ListIndexOutOfBoundsException {
-    // todo: part of step 4: this method doesn't work yet - you need to write this code
-    // What needs to happen when you remove something from an array-based list?
-    
+    // DONE --- todo: part of step 4: this method doesn't work yet - you need to write this code
+    //          What needs to happen when you remove something from an array-based list?
+    if( position > numItems - 1 || position < 0)
+    {
+      throw new ListIndexOutOfBoundsException("List exception on remove- position idex out" +
+      " of range of List- current pos <" + position + "> and length of list <" + numItems + ">");
+    }
+    else
+    {
+      int removedItem = items[position];
+      for(int i = position ; i < numItems - 1; i++)
+      {
+        items[i] = items[i + 1];
+        //items[numItems - 1] = 0;
+      }
+      numItems--; 
+    return removedItem; //should return what is being removed
+    }
     // Someone might ask to remove an item from a location that does not exist
     // todo: part of step 5: be sure that the message for this exception 
     // provides correct details about the problem
-    return 0;
   }
 
   @Override
@@ -68,7 +83,7 @@ public class IntListArrayBased implements IntegerList {
 
   @Override
   public void moveToEnd() {
-    position = numItems;
+    position = numItems - 1;
 
   }
 
