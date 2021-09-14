@@ -28,7 +28,7 @@ public class ListTester {
   @Test
   public void testAddMethod() {
     IntegerList list = new IntListArrayBased();
-
+    list.insert(13);
     // Information can be added to the log
     logger.info("The list looks like:" + list);
 
